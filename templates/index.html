@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Development Roadmap</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="floating-particles" id="particles"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-robot me-2"></i>RoboTech Labs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#roadmaps">Roadmaps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">ROBOTICS ROADMAP</h1>
+            <p class="hero-subtitle">Your Complete Guide to Robot Development</p>
+            <div class="mt-4">
+                <i class="fas fa-robot" style="font-size: 3rem; color: var(--primary-color);"></i>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-fluid roadmap-container">
+        <div class="roadmap-line"></div>
+        
+        <!-- Step 1: Planning & Requirements -->
+        <div class="roadmap-step">
+            <div class="step-icon">
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="step-content">
+                        <span class="skill-level beginner">Beginner</span>
+                        <h2 class="step-title">Project Planning & Requirements</h2>
+                        <p class="step-description">
+                            Define your robot's purpose, establish project scope, and identify all necessary components. This foundational step determines the success of your entire project.
+                        </p>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-name">Notion</div>
+                                <div class="tool-description">Project management and documentation</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Trello</div>
+                                <div class="tool-description">Task organization and workflow</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Miro</div>
+                                <div class="tool-description">Mind mapping and brainstorming</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Draw.io</div>
+                                <div class="tool-description">System architecture diagrams</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3" style="color: var(--primary-color);">Key Resources:</h5>
+                        <ul class="resources-list">
+                            <li>IEEE Robotics Standards Documentation</li>
+                            <li>Robot Operating System (ROS) Planning Guidelines</li>
+                            <li>Robotics Project Management Templates</li>
+                            <li>Component Selection Guides</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Electronics & Components -->
+        <div class="roadmap-step">
+            <div class="step-icon">
+                <i class="fas fa-microchip"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-6">
+                    <div class="step-content">
+                        <span class="skill-level beginner">Beginner</span>
+                        <h2 class="step-title">Electronics & Components</h2>
+                        <p class="step-description">
+                            Learn about microcontrollers, sensors, actuators, and power systems. Understanding electronics is crucial for building functional robots.
+                        </p>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-name">Arduino IDE</div>
+                                <div class="tool-description">Programming microcontrollers</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Raspberry Pi</div>
+                                <div class="tool-description">Single-board computer platform</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Fritzing</div>
+                                <div class="tool-description">Circuit design and prototyping</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">KiCad</div>
+                                <div class="tool-description">Professional PCB design</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3" style="color: var(--primary-color);">Essential Components:</h5>
+                        <ul class="resources-list">
+                            <li>Microcontrollers (Arduino Uno, ESP32, Raspberry Pi)</li>
+                            <li>Sensors (Ultrasonic, IMU, Camera, Lidar)</li>
+                            <li>Actuators (Servo motors, Stepper motors, DC motors)</li>
+                            <li>Power Management (Batteries, Voltage regulators)</li>
+                            <li>Communication Modules (WiFi, Bluetooth, RF)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: CAD Modeling -->
+        <div class="roadmap-step">
+            <div class="step-icon">
+                <i class="fas fa-cube"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="step-content">
+                        <span class="skill-level intermediate">Intermediate</span>
+                        <h2 class="step-title">CAD Modeling & Design</h2>
+                        <p class="step-description">
+                            Create detailed 3D models of your robot parts. CAD modeling helps visualize designs, test fit, and prepare for manufacturing.
+                        </p>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-name">Fusion 360</div>
+                                <div class="tool-description">Professional CAD with simulation</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">SolidWorks</div>
+                                <div class="tool-description">Industry-standard CAD software</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Onshape</div>
+                                <div class="tool-description">Cloud-based CAD platform</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Blender</div>
+                                <div class="tool-description">Open-source 3D modeling</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3" style="color: var(--primary-color);">Learning Resources:</h5>
+                        <ul class="resources-list">
+                            <li>Fusion 360 for Robotics Course</li>
+                            <li>CAD Fundamentals Online Tutorials</li>
+                            <li>3D Printing Design Guidelines</li>
+                            <li>Mechanical Design Principles</li>
+                            <li>Assembly and Constraint Modeling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Prototyping -->
+        <div class="roadmap-step">
+            <div class="step-icon">
+                <i class="fas fa-hammer"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-6">
+                    <div class="step-content">
+                        <span class="skill-level intermediate">Intermediate</span>
+                        <h2 class="step-title">Prototyping & Manufacturing</h2>
+                        <p class="step-description">
+                            Transform your designs into physical parts using 3D printing, CNC machining, and other fabrication methods.
+                        </p>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-name">3D Printers</div>
+                                <div class="tool-description">FDM, SLA, SLS printing</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">CNC Machines</div>
+                                <div class="tool-description">Precision machining</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Laser Cutters</div>
+                                <div class="tool-description">Sheet material cutting</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Soldering Station</div>
+                                <div class="tool-description">Electronics assembly</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3" style="color: var(--primary-color);">Manufacturing Options:</h5>
+                        <ul class="resources-list">
+                            <li>3D Printing Services (Shapeways, Craftcloud)</li>
+                            <li>PCB Manufacturing (JLCPCB, PCBWay)</li>
+                            <li>CNC Machining Services (Xometry, Protolabs)</li>
+                            <li>Local Maker Spaces and Fab Labs</li>
+                            <li>University Machine Shops</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Programming -->
+        <div class="roadmap-step">
+            <div class="step-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="step-content">
+                        <span class="skill-level intermediate">Intermediate</span>
+                        <h2 class="step-title">Programming & Control</h2>
+                        <p class="step-description">
+                            Implement control algorithms, sensor integration, and robot behavior. Programming brings your robot to life.
+                        </p>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-name">Python</div>
+                                <div class="tool-description">High-level robotics programming</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">C++</div>
+                                <div class="tool-description">Real-time control systems</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">ROS (Robot Operating System)</div>
+                                <div class="tool-description">Robotics middleware framework</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">MATLAB/Simulink</div>
+                                <div class="tool-description">Control system design</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3" style="color: var(--primary-color);">Programming Topics:</h5>
+                        <ul class="resources-list">
+                            <li>Sensor Data Processing</li>
+                            <li>Motor Control and PWM</li>
+                            <li>PID Control Algorithms</li>
+                            <li>State Machines and Behaviors</li>
+                            <li>Computer Vision (OpenCV)</li>
+                            <li>Machine Learning Integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6: Debugging -->
+        <div class="roadmap-step">
+            <div class="step-icon">
+                <i class="fas fa-bug"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-6">
+                    <div class="step-content">
+                        <span class="skill-level advanced">Advanced</span>
+                        <h2 class="step-title">Debugging & Optimization</h2>
+                        <p class="step-description">
+                            Identify and fix issues in both hardware and software. Effective debugging is essential for reliable robot operation.
+                        </p>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-name">Oscilloscope</div>
+                                <div class="tool-description">Signal analysis and debugging</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Logic Analyzer</div>
+                                <div class="tool-description">Digital signal debugging</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Multimeter</div>
+                                <div class="tool-description">Basic electrical measurements</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Serial Monitor</div>
+                                <div class="tool-description">Software debugging output</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3" style="color: var(--primary-color);">Debugging Techniques:</h5>
+                        <ul class="resources-list">
+                            <li>Systematic Problem Isolation</li>
+                            <li>Hardware Signal Tracing</li>
+                            <li>Software Print Debugging</li>
+                            <li>Performance Profiling</li>
+                            <li>Unit Testing Frameworks</li>
+                            <li>Version Control Best Practices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 7: Testing -->
+        <div class="roadmap-step">
+            <div class="step-icon">
+                <i class="fas fa-flask"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="step-content">
+                        <span class="skill-level advanced">Advanced</span>
+                        <h2 class="step-title">Testing & Validation</h2>
+                        <p class="step-description">
+                            Comprehensive testing ensures your robot performs reliably under various conditions. Validate all requirements systematically.
+                        </p>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-name">Gazebo</div>
+                                <div class="tool-description">Robot simulation environment</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Unity</div>
+                                <div class="tool-description">3D simulation and testing</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">JUnit/pytest</div>
+                                <div class="tool-description">Automated testing frameworks</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Load Testing Tools</div>
+                                <div class="tool-description">Performance and stress testing</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3" style="color: var(--primary-color);">Testing Approaches:</h5>
+                        <ul class="resources-list">
+                            <li>Unit Testing (Individual Components)</li>
+                            <li>Integration Testing (System Level)</li>
+                            <li>Performance Testing (Speed, Accuracy)</li>
+                            <li>Environmental Testing (Temperature, Humidity)</li>
+                            <li>Safety Testing (Fail-safe Mechanisms)</li>
+                            <li>User Acceptance Testing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 8: Deployment -->
+        <div class="roadmap-step">
+            <div class="step-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-6">
+                    <div class="step-content">
+                        <span class="skill-level advanced">Advanced</span>
+                        <h2 class="step-title">Deployment & Maintenance</h2>
+                        <p class="step-description">
+                            Deploy your robot for real-world operation. Plan for ongoing maintenance, updates, and continuous improvement.
+                        </p>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-name">Docker</div>
+                                <div class="tool-description">Containerized deployment</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Git</div>
+                                <div class="tool-description">Version control and updates</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Remote Monitoring</div>
+                                <div class="tool-description">System health tracking</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">OTA Updates</div>
+                                <div class="tool-description">Over-the-air software updates</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3" style="color: var(--primary-color);">Deployment Considerations:</h5>
+                        <ul class="resources-list">
+                            <li>Production Environment Setup</li>
+                            <li>Remote Monitoring Systems</li>
+                            <li>Backup and Recovery Plans</li>
+                            <li>Documentation and User Manuals</li>
+                            <li>Maintenance Schedules</li>
+                            <li>Performance Monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community & Resources -->
+        <div class="roadmap-step">
+            <div class="step-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="step-content">
+                        <h2 class="step-title">Community & Continuous Learning</h2>
+                        <p class="step-description">
+                            Join the robotics community, contribute to open-source projects, and keep learning. The field evolves rapidly!
+                        </p>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-name">ROS Community</div>
+                                <div class="tool-description">Robot Operating System forums</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">Arduino Community</div>
+                                <div class="tool-description">Maker and electronics forums</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">GitHub</div>
+                                <div class="tool-description">Open-source robotics projects</div>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-name">IEEE Robotics</div>
+                                <div class="tool-description">Professional robotics community</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3" style="color: var(--primary-color);">Learning Resources:</h5>
+                        <ul class="resources-list">
+                            <li>Coursera Robotics Specialization</li>
+                            <li>edX MITx Robotics Courses</li>
+                            <li>YouTube Robotics Channels</li>
+                            <li>Robotics Conferences (ICRA, IROS)</li>
+                            <li>Local Robotics Meetups</li>
+                            <li>Online Competitions (RoboCup, DARPA)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

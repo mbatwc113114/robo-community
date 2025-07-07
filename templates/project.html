@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Drone Project - RoboTech Labs</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Specific styles for project.html if needed, overriding or extending style.css */
+        .project-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, var(--dark-bg) 100%);
+            padding: 100px 0 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .project-header .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-header .hero-subtitle {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .project-section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(0, 102, 255, 0.5);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        /* Adjust columns for content and image */
+        .timeline-item .col-md-6 {
+            padding: 0 15px; /* Add some padding if Bootstrap's default isn't enough */
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse; /* Content on right, image on left */
+        }
+
+        .timeline-item-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%; /* Occupy full column width */
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item-content:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .timeline-item-date {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .timeline-item-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .timeline-item-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.6);
+            z-index: 10;
+            border: 3px solid var(--dark-bg);
+        }
+
+        .timeline-image-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%; /* Ensure it takes full height of its column */
+            position: relative; /* For absolute positioning of image if needed */
+        }
+
+        .timeline-image {
+            max-width: 80%; /* Adjust size as needed */
+            max-height: 250px; /* Limit height if images are too tall */
+            opacity: 0.15; /* Make it subtle */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            filter: grayscale(100%); /* Optional: Make images grayscale */
+            object-fit: contain; /* Ensure image fits without cropping */
+        }
+        
+        .timeline-item.animate .timeline-image {
+            opacity: 0.3; /* Slightly brighter when animated */
+            filter: grayscale(0%); /* Full color when animated */
+            transform: scale(1.05); /* Slight zoom effect */
+        }
+
+        .plan-item {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+            margin-bottom: 30px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .plan-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .plan-item h3 {
+            font-family: 'Orbitron', monospace;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .plan-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plan-item ul li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+        }
+
+        .plan-item ul li:last-child {
+            border-bottom: none;
+        }
+
+        .tools-section .tools-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .tool-card .tool-name {
+            color: var(--accent-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .timeline::before {
+                left: 20px;
+            }
+            .timeline-item {
+                flex-direction: column !important; /* Stack content and image */
+                align-items: flex-start;
+            }
+            .timeline-item-content {
+                width: 100%;
+                margin: 0 !important;
+                text-align: left !important;
+                padding-left: 80px; /* Space for icon */
+            }
+            .timeline-icon {
+                left: 20px;
+                top: 20px;
+                transform: none;
+            }
+            .timeline-image-wrapper {
+                height: auto; /* Allow image wrapper to size naturally */
+                margin-top: 30px; /* Space between content and image */
+                margin-left: 80px; /* Align with content padding */
+            }
+            .timeline-image {
+                max-width: 150px; /* Smaller images on mobile */
+                max-height: 150px;
+                opacity: 0.3; /* Keep it slightly more visible on smaller screens if desired */
+                filter: grayscale(0%); /* Remove grayscale on mobile */
+                transform: none; /* No zoom effect on mobile if space is tight */
+            }
+            .timeline-item.animate .timeline-image {
+                opacity: 0.5; /* More visible animate state for mobile */
+                transform: none;
+            }
+            .project-header .hero-title {
+                font-size: 2.8rem;
+            }
+            .project-header .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="floating-particles" id="particles"></div>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <i class="fas fa-robot me-2"></i>RoboTech Labs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="home.html#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#roadmaps">Roadmaps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section project-header">
+        <div class="hero-content">
+            <h1 class="hero-title">AI-POWERED INSPECTION DRONE</h1>
+            <p class="hero-subtitle">Building an intelligent drone for autonomous infrastructure inspection, utilizing computer vision and machine learning for defect detection and reporting.</p>
+            <div class="mt-4">
+                <span class="skill-level advanced">Advanced Project</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-fluid roadmap-container"> 
+        <section class="project-section" id="overview">
+            <div class="container">
+                <h2 class="section-title text-center">Project Overview</h2>
+                <p class="step-description text-center mb-5">
+                    This project focuses on the development of an autonomous drone system capable of performing automated visual inspections of critical infrastructure, such as bridges, pipelines, and wind turbines. The drone will leverage advanced computer vision and machine learning algorithms to identify, classify, and report structural defects with high accuracy, minimizing human intervention and maximizing safety.
+                </p>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="plan-item">
+                            <h3><i class="fas fa-bullseye me-2"></i>Primary Goal</h3>
+                            <p>Automate infrastructure inspection to enhance safety, efficiency, and data accuracy.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="plan-item">
+                            <h3><i class="fas fa-chart-line me-2"></i>Key Technologies</h3>
+                            <p>Computer Vision, Deep Learning, Autonomous Navigation, Embedded Systems.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="plan-item">
+                            <h3><i class="fas fa-handshake me-2"></i>Target Application</h3>
+                            <p>Industrial inspection, civil engineering, energy sector.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-section" id="timeline">
+            <div class="container">
+                <h2 class="section-title text-center">Project Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="row w-100 align-items-center justify-content-center">
+                            <div class="col-md-6 order-md-1">
+                                <div class="timeline-item-content">
+                                    <div class="timeline-item-date">Q1 2025</div>
+                                    <h3 class="timeline-item-title">Phase 1: Research & Conceptualization</h3>
+                                    <p class="timeline-item-description">Detailed literature review on existing drone inspection systems, AI models for defect detection, and regulatory requirements. Define drone specifications and operational parameters.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-0 d-flex justify-content-center">
+                                <div class="timeline-image-wrapper">
+                                    <img src="image_2b1f79.png" alt="Conceptualization Image" class="timeline-image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-icon"><i class="fas fa-lightbulb"></i></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="row w-100 align-items-center justify-content-center">
+                            <div class="col-md-6 order-md-0">
+                                <div class="timeline-item-content">
+                                    <div class="timeline-item-date">Q2 2025</div>
+                                    <h3 class="timeline-item-title">Phase 2: Hardware Prototyping & Integration</h3>
+                                    <p class="timeline-item-description">Design and assemble drone airframe, select and integrate propulsion system, flight controller, high-resolution cameras, and processing unit. Initial flight tests for stability.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1 d-flex justify-content-center">
+                                <div class="timeline-image-wrapper">
+                                    <img src="image_2ac0e5.png" alt="Hardware Prototyping Image" class="timeline-image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-icon"><i class="fas fa-wrench"></i></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="row w-100 align-items-center justify-content-center">
+                            <div class="col-md-6 order-md-1">
+                                <div class="timeline-item-content">
+                                    <div class="timeline-item-date">Q3 2025</div>
+                                    <h3 class="timeline-item-title">Phase 3: Software Development - Navigation & Control</h3>
+                                    <p class="timeline-item-description">Develop and implement autonomous navigation algorithms (SLAM, path planning), robust flight control, and sensor fusion for precise positioning and obstacle avoidance.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-0 d-flex justify-content-center">
+                                <div class="timeline-image-wrapper">
+                                    <img src="image_placeholder_code.png" alt="Software Development Image" class="timeline-image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-icon"><i class="fas fa-code"></i></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="row w-100 align-items-center justify-content-center">
+                            <div class="col-md-6 order-md-0">
+                                <div class="timeline-item-content">
+                                    <div class="timeline-item-date">Q4 2025</div>
+                                    <h3 class="timeline-item-title">Phase 4: AI Model Training & Integration</h3>
+                                    <p class="timeline-item-description">Collect and annotate large datasets of infrastructure defects. Train deep learning models (CNNs) for anomaly detection and classification. Integrate AI models with drone's perception system.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1 d-flex justify-content-center">
+                                <div class="timeline-image-wrapper">
+                                    <img src="image_placeholder_brain.png" alt="AI Model Training Image" class="timeline-image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-icon"><i class="fas fa-brain"></i></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="row w-100 align-items-center justify-content-center">
+                            <div class="col-md-6 order-md-1">
+                                <div class="timeline-item-content">
+                                    <div class="timeline-item-date">Q1 2026</div>
+                                    <h3 class="timeline-item-title">Phase 5: Field Testing & Optimization</h3>
+                                    <p class="timeline-item-description">Conduct extensive field tests in various environments. Refine navigation, control, and AI performance based on real-world data. Debug and optimize entire system for reliability.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-0 d-flex justify-content-center">
+                                <div class="timeline-image-wrapper">
+                                    <img src="image_placeholder_flask.png" alt="Field Testing Image" class="timeline-image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-icon"><i class="fas fa-flask"></i></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="row w-100 align-items-center justify-content-center">
+                            <div class="col-md-6 order-md-0">
+                                <div class="timeline-item-content">
+                                    <div class="timeline-item-date">Q2 2026</div>
+                                    <h3 class="timeline-item-title">Phase 6: Reporting & Deployment Preparation</h3>
+                                    <p class="timeline-item-description">Develop automated reporting tools for inspection results. Create user interface for mission planning and data visualization. Prepare for pilot deployment and commercialization.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 order-md-1 d-flex justify-content-center">
+                                <div class="timeline-image-wrapper">
+                                    <img src="image_placeholder_rocket.png" alt="Deployment Image" class="timeline-image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-icon"><i class="fas fa-rocket"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-section" id="plan">
+            <div class="container">
+                <h2 class="section-title text-center">Project Plan & Deliverables</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="plan-item">
+                            <h3><i class="fas fa-list-alt me-2"></i>Work Breakdown Structure (WBS)</h3>
+                            <ul>
+                                <li><strong>Hardware Development:</strong> Drone frame, propulsion, power, camera integration.</li>
+                                <li><strong>Flight Control System:</strong> PID tuning, attitude estimation, stabilization.</li>
+                                <li><strong>Navigation & Perception:</strong> SLAM implementation, sensor fusion, obstacle avoidance.</li>
+                                <li><strong>AI & Computer Vision:</strong> Data pipeline, model training, inference optimization.</li>
+                                <li><strong>Ground Control Station:</strong> Mission planning UI, real-time telemetry, data download.</li>
+                                <li><strong>Testing & Validation:</strong> Unit tests, integration tests, field trials.</li>
+                                <li><strong>Documentation:</strong> Design documents, user manuals, technical reports.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="plan-item">
+                            <h3><i class="fas fa-clipboard-check me-2"></i>Key Deliverables</h3>
+                            <ul>
+                                <li>Functional drone prototype capable of autonomous flight.</li>
+                                <li>Deployed AI model for defect detection with target accuracy (e.g., 90% F1-score).</li>
+                                <li>Comprehensive flight planning and data analysis software.</li>
+                                <li>Detailed technical documentation and user guides.</li>
+                                <li>Safety protocols and emergency procedures.</li>
+                                <li>Performance metrics report from field trials.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="plan-item">
+                            <h3><i class="fas fa-users-cog me-2"></i>Team Structure & Responsibilities</h3>
+                            <ul>
+                                <li><strong>Project Lead:</strong> Overall project management, strategic direction.</li>
+                                <li><strong>Hardware Engineer:</strong> Drone design, component selection, assembly.</li>
+                                <li><strong>Firmware Engineer:</strong> Flight controller programming, sensor interfacing.</li>
+                                <li><strong>Robotics Software Engineer:</strong> Navigation, SLAM, motion planning (ROS).</li>
+                                <li><strong>AI/ML Engineer:</strong> Data pipeline, model training, computer vision algorithms.</li>
+                                <li><strong>Test Engineer:</strong> Develop test plans, execute tests, bug reporting.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-section tools-section" id="tools">
+            <div class="container">
+                <h2 class="section-title text-center">Tools & Technologies</h2>
+                <p class="step-description text-center mb-5">
+                    A robust set of tools and technologies will be utilized across hardware, software, and AI development phases to ensure project success.
+                </p>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-name">PX4/ArduPilot</div>
+                        <div class="tool-description">Open-source flight control stack</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">ROS (Robot Operating System)</div>
+                        <div class="tool-description">Robotics middleware for integration</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">Python / C++</div>
+                        <div class="tool-description">Primary programming languages</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">TensorFlow / PyTorch</div>
+                        <div class="tool-description">AI/ML model development</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">OpenCV</div>
+                        <div class="tool-description">Computer Vision library</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">Gazebo / AirSim</div>
+                        <div class="tool-description">Drone simulation environments</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">SolidWorks / Fusion 360</div>
+                        <div class="tool-description">CAD for drone frame design</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">KiCad / Altium Designer</div>
+                        <div class="tool-description">PCB design for custom electronics</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">Jupyter Notebooks</div>
+                        <div class="tool-description">AI model prototyping & analysis</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">Git / GitHub</div>
+                        <div class="tool-description">Version control & collaboration</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">Jira / Trello</div>
+                        <div class="tool-description">Project management & task tracking</div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-name">Confluence / Notion</div>
+                        <div class="tool-description">Documentation & knowledge base</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-section" id="contact-project">
+            <div class="container text-center">
+                <h2 class="section-title">Interested in this Project?</h2>
+                <p class="hero-subtitle">We're always looking for collaborators and feedback. Reach out to us!</p>
+                <a href="home.html#contact" class="btn btn-primary" style="background: var(--gradient-1); border: none; padding: 15px 30px; border-radius: 30px; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; text-decoration: none; color: white; box-shadow: 0 0 20px rgba(0,255,136,0.5);">Contact Us <i class="fas fa-envelope ms-2"></i></a>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const timelineObserverOptions = {
+                threshold: 0.2, // Trigger when 20% of the item is visible
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate'); // Add an 'animate' class for CSS animation
+                    } else {
+                        entry.target.classList.remove('animate'); // Optional: remove on scroll out if you want to re-trigger
+                    }
+                });
+            }, timelineObserverOptions);
+
+            timelineItems.forEach(item => {
+                timelineObserver.observe(item);
+            });
+
+            // Ensure floating particles and progress bar are initialized
+            createParticles(); // From script.js
+            updateProgressBar(); // From script.js
+        });
+
+        // Re-call these from script.js to ensure they are active on this page
+        window.addEventListener('scroll', updateProgressBar);
+    </script>
+</body>
+</html>
